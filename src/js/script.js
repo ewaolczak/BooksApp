@@ -19,7 +19,7 @@
     )
   };
 
-  function render() {
+  const render = function () {
     for (let book of dataSource.books) {
       const generatedHTML = templates.book(book);
 
@@ -29,6 +29,14 @@
 
       bookListElement.appendChild(DOMElement);
     }
-  }
+  };
+
+  const favoriteBooks = [];
+
+  const initAction = function (event) {
+    for (let book of dataSource.books) {
+    }
+  };
+
   render();
 }
