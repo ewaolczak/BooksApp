@@ -77,6 +77,12 @@
             clickedBookParent.classList.add('favorite');
             // console.log('clickedBook:', clickedBook);
             // console.log('favoriteBooks:', favoriteBooks);
+          } else {
+            clickedBookParent.classList.remove('favorite');
+            const unlikedBookIndex = favoriteBooks.indexOf(bookId);
+            favoriteBooks.splice(unlikedBookIndex, 1);
+            // console.log('clickedBook:', clickedBook);
+            // console.log('favoriteBooks:', favoriteBooks);
           }
         }
       });
