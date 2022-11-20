@@ -15,10 +15,10 @@
       book: '#template-book'
     },
     containerOf: {
-      bookList: '.book-list'
+      booksList: '.books-list'
     },
     book: {
-      image: '.book-list .book__image'
+      image: '.book__image'
     }
   };
 
@@ -32,7 +32,18 @@
     constructor() {
       const thisBooksList = this;
 
+      thisBooksList.getElements();
       thisBooksList.render();
+      thisBooksList.initAction();
+    }
+
+    getElements() {
+      const thisBooksList = this;
+
+      thisBooksList.booksList = document.querySelector(
+        select.containerOf.booksList
+      );
+      thisBooksList.bookImage = document.querySelector(select.book.image);
     }
 
     render() {
@@ -44,14 +55,31 @@
         /* create emelement using utils.createElementFromHTML */
         thisBooksList.element = utils.createDOMFromHTML(generatedHTML);
 
-        /* find books container */
-        const booksListContainer = document.querySelector(
-          select.containerOf.bookList
-        );
-
         /* add element to books list */
-        booksListContainer.appendChild(thisBooksList.element);
+        thisBooksList.booksList.appendChild(thisBooksList.element);
       }
+    }
+
+    initAction() {
+      const thisBooksList = this;
+
+      const favoriteBooks = [];
+      // console.log('favoriteBooks:', favoriteBooks);
+
+      thisBooksList.booksList.addEventListener('dblclick', function (event) {
+        event.preventDefault();
+        const clickedBook = event.target;
+        const clickedBookParent = clickedBook.offsetParent;
+        if (clickedBookParent.classList.contains('book__image')) {
+          const bookId = clickedBookParent.getAttribute('data-id');
+          if (!favoriteBooks.includes(bookId)) {
+            favoriteBooks.push(bookId);
+            clickedBookParent.classList.add('favorite');
+            // console.log('clickedBook:', clickedBook);
+            // console.log('favoriteBooks:', favoriteBooks);
+          }
+        }
+      });
     }
   }
 
