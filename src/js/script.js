@@ -46,8 +46,6 @@
       thisBooksList.booksList = document.querySelector(
         select.containerOf.booksList
       );
-      thisBooksList.bookImage = document.querySelector(select.book.image);
-      thisBooksList.form = document.querySelector(select.containerOf.filters);
     }
 
     render() {
@@ -66,6 +64,8 @@
 
     initAction() {
       const thisBooksList = this;
+
+      thisBooksList.form = document.querySelector(select.containerOf.filters);
 
       thisBooksList.favoriteBooks = [];
       // console.log('favoriteBooks:', favoriteBooks);
@@ -111,9 +111,9 @@
           );
         }
         console.log('thisBookList.filters:', thisBooksList.filters);
+        
+        thisBooksList.filterBooks();
       });
-
-      this.filterBooks();
     }
 
     filterBooks() {
